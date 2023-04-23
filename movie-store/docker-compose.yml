@@ -1,0 +1,17 @@
+#version: "20"
+services:
+  movie_store:
+    build: .
+    container_name: "movie_store"
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongoservice
+  mongoservice:
+    image: mongo:latest
+    container_name: "mongodb"
+    volumes:
+      - /Users/sbhartia2/mongo/data/db:/data/db
+    ports:
+      - 27018:27017

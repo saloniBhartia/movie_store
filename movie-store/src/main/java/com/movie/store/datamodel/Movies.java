@@ -3,12 +3,11 @@ package com.movie.store.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("movie")
-public class Movie {
-
+@Document(collection = "Movies")
+public class Movies {
 
     @Id
     private String _id;
@@ -17,8 +16,8 @@ public class Movie {
     List<String> cast = new ArrayList<>();
     Integer year;
     String extract;
-    public Movie(){}
-    public Movie(String id, String title, List<String> genres, List<String> cast, Integer year, String extract) {
+    public Movies(){}
+    public Movies(String id, String title, List<String> genres, List<String> cast, Integer year, String extract) {
         super();
         this._id = id;
         this.title = title;
@@ -26,10 +25,6 @@ public class Movie {
         this.cast = cast;
         this.year = year;
         this.extract = extract;
-    }
-
-    public Movie(String title) {
-        new Movie(title, title, new ArrayList<>(), new ArrayList<>(), 9999, title);
     }
 
     public String get_id() {

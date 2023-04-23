@@ -1,17 +1,13 @@
 package com.movie.store.viewModel;
 
 import com.movie.store.databaseRepository.MovieRepository;
-import com.movie.store.datamodel.Movie;
-import org.bson.types.ObjectId;
+import com.movie.store.datamodel.Movies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class MovieStore {
@@ -19,43 +15,43 @@ public class MovieStore {
     @Autowired
     MovieRepository movieRepository;
 
-    public List<Movie> getMovieDetails(String movieName) {
-        List<Movie> movieList = new ArrayList<>();
-        movieRepository.findAll().forEach( movie -> {
-            if(movie.getTitle().equals(movieName)) {
-                movieList.add(movie);
+    public List<Movies> getMovieDetails(String movieName) {
+        List<Movies> moviesList = new ArrayList<>();
+        movieRepository.findAll().forEach(movies -> {
+            if(movies.getTitle().equals(movieName)) {
+                moviesList.add(movies);
             }
         });
-        return movieList;
+        return moviesList;
     }
 
-    public List<Movie> getMoviesByYear(Integer year) {
-        List<Movie> movieList = new ArrayList<>();
-        movieRepository.findAll().forEach(movie -> {
-            if(Objects.equals(movie.getYear(), year)) {
-                movieList.add(movie);
+    public List<Movies> getMoviesByYear(Integer year) {
+        List<Movies> moviesList = new ArrayList<>();
+        movieRepository.findAll().forEach(movies -> {
+            if(Objects.equals(movies.getYear(), year)) {
+                moviesList.add(movies);
             }
         });
-        return movieList;
+        return moviesList;
     }
 
-    public List<Movie> getMoviesByCast(String castName) {
-        List<Movie> movieList = new ArrayList<>();
-        movieRepository.findAll().forEach(movie -> {
-            if(movie.getCast().contains(castName)) {
-                movieList.add(movie);
+    public List<Movies> getMoviesByCast(String castName) {
+        List<Movies> moviesList = new ArrayList<>();
+        movieRepository.findAll().forEach(movies -> {
+            if(movies.getCast().contains(castName)) {
+                moviesList.add(movies);
             }
         });
-        return movieList;
+        return moviesList;
     }
 
-    public List<Movie> getMoviesByGenre(String genre) {
-        List<Movie> movieList = new ArrayList<>();
-        movieRepository.findAll().forEach(movie -> {
-            if(movie.getGenres().contains(genre)) {
-                movieList.add(movie);
+    public List<Movies> getMoviesByGenre(String genre) {
+        List<Movies> moviesList = new ArrayList<>();
+        movieRepository.findAll().forEach(movies -> {
+            if(movies.getGenres().contains(genre)) {
+                moviesList.add(movies);
             }
         });
-        return movieList;
+        return moviesList;
     }
 }
