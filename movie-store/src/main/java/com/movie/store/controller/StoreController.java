@@ -23,7 +23,7 @@ public class StoreController {
         return "Greetings to the movie store!";
     }
 
-    @GetMapping("/movieName")
+    @GetMapping("/movie")
     public ResponseEntity<List<Movies>> getMovieDetails(@RequestParam(required = false) String movieName,
                                                         @RequestParam(required = false) Integer year,
                                                         @RequestParam(required = false) String cast,

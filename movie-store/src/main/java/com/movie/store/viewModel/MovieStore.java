@@ -17,7 +17,7 @@ public class MovieStore {
 
     public List<Movies> getMovieDetails1(String movieName, Integer year, String cast, String genre) {
         return movieRepository.findAll().stream()
-                .filter(a -> isNullOrEmpty(movieName) || a.getTitle().equals(movieName))
+                .filter(a -> isNullOrEmpty(movieName) || a.getTitle().equalsIgnoreCase(movieName))
                 .filter(a -> (year == null) || Objects.equals(a.getYear(), year))
                 .filter(a -> isNullOrEmpty(cast) || a.getCast().contains(cast))
                 .filter(a -> isNullOrEmpty(genre) || a.getGenres().contains(genre))
