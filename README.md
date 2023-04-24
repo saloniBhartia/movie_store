@@ -2,5 +2,4 @@
  Store of movie data that is accessible via a Restful API
  
  
- 
-![architecture](https://user-images.githubusercontent.com/15120809/233875228-97a6caf4-fd8d-4de5-92ef-fa53ec36f157.png)
+![architecture](https://user-images.githubusercontent.com/15120809/233940571-340c8bdc-3a2e-4255-a120-028feaa06d57.png)
