@@ -24,39 +24,22 @@ public class StoreController {
     }
 
     @GetMapping("/movieName")
-    public ResponseEntity<List<Movies>> getMovieDetails(@RequestParam String movieName) {
+    public ResponseEntity<List<Movies>> getMovieDetails(@RequestParam(required = false) String movieName,
+                                                        @RequestParam(required = false) Integer year,
+                                                        @RequestParam(required = false) String cast,
+                                                        @RequestParam(required = false) String genre) {
         try {
-            return ResponseEntity.ok(movieStore.getMovieDetails(movieName));
+            return sanitizeOutput(movieStore.getMovieDetails1(movieName, year, cast, genre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(null);
         }
     }
 
-    @GetMapping("/year")
-    public ResponseEntity<List<Movies>> getMoviesByYear(@RequestParam Integer year) {
-        try {
-            return ResponseEntity.ok(movieStore.getMoviesByYear(year));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    private ResponseEntity<List<Movies>> sanitizeOutput(List<Movies> movies) {
+        if (movies.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
-    }
-
-    @GetMapping("/cast")
-    public ResponseEntity<List<Movies>> getMoviesByCast(@RequestParam String cast) {
-        try {
-            return ResponseEntity.ok(movieStore.getMoviesByCast(cast));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-    }
-
-    @GetMapping("/genre")
-    public ResponseEntity<List<Movies>> getMoviesByGenre(@RequestParam String genre) {
-        try {
-            return ResponseEntity.ok(movieStore.getMoviesByGenre(genre));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
+        return ResponseEntity.ok(movies);
     }
 
 }
