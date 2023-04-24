@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: movie-db-config
+data:
+ host: moviedb-service
+ database: movie_store
+ port: 27017
